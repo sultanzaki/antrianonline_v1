@@ -126,5 +126,6 @@ class Dashboard extends Component
     public function changeTab($tab)
     {
         $this->activeTab = $tab;
+
     }
 }

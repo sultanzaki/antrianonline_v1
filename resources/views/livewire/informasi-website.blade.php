@@ -27,7 +27,7 @@
     <form wire:submit="updatePesan" class="space-y-4">
         <div>
             <label for="pesan" class="block text-sm font-medium text-gray-700">Tulisan Berjalan</label>
-            <textarea id="pesan" wire:model.live="pesan" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+            <textarea id="pesan" wire:model.live="pesan" rows="3" class="block w-full px-4 py-3 rounded-md bg-gray-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 transition duration-200 ease-in-out shadow-sm hover:shadow-md"></textarea>
             @error('pesan') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         </div>
         <div>

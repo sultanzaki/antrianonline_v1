@@ -23,23 +23,22 @@
                 <span class="block sm:inline">{{ session('error') }}</span>
             </div>
         @endif
-    <div class="overflow-x-auto shadow-md sm:rounded-lg max-w-full mx-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">   
+        <div class="overflow-x-auto shadow-md sm:rounded-lg max-w-full mx-auto">
             <table class="min-w-full divide-y divide-gray-200 sm:table-fixed">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider hidden sm:table-cell">Nama Rate</th>
-                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider hidden sm:table-cell">Rate</th>
-                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider hidden sm:table-cell">Aksi</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">Nama Rate</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">Rate</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($lpss as $lps)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium hidden sm:table-cell">{{ $lps->nama_rate }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium hidden sm:table-cell">{{ $lps->rate }}%</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ $lps->nama_rate }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ $lps->rate }}%</td>
                             <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                                 <button wire:click="openEditModal('{{ $lps->id }}')" class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                            </td>
                             </td>
                         </tr>
                     @endforeach
@@ -58,10 +57,10 @@
                         <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Edit LPS
                         <div class="mt-2">
                             <label for="nama_rate" class="block text-sm font-medium text-gray-700 mb-1">Nama Rate</label>
-                            <input wire:model="editingLps.nama_rate" class="block w-full pl-3 pr-4 py-3 rounded-md bg-gray-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 transition duration-200 ease-in-out shadow-sm hover:shadow-md" type="text" placeholder="Nama Rate">
+                            <input name="nama_rate" wire:model="editingLps.nama_rate" class="block w-full pl-3 pr-4 py-3 rounded-md bg-gray-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 transition duration-200 ease-in-out shadow-sm hover:shadow-md" type="text" placeholder="Nama Rate">
                             @error('editingLps.nama_rate') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             <label for="rate" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Rate (%)</label>
-                            <input wire:model="editingLps.rate" class="block w-full pl-3 pr-4 py-3 rounded-md bg-gray-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 transition duration-200 ease-in-out shadow-sm hover:shadow-md" type="text" placeholder="Rate">
+                            <input name="rate" wire:model="editingLps.rate" class="block w-full pl-3 pr-4 py-3 rounded-md bg-gray-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 transition duration-200 ease-in-out shadow-sm hover:shadow-md" type="text" placeholder="Rate">
                             @error('editingLps.rate') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                         </div>
                     </div>

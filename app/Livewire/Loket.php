@@ -27,6 +27,7 @@ class Loket extends Component
             $loket = LoketPelayanan::where('id_loket', $id_loket)->first();
             if (!$loket) {
                 session()->flash('error', 'Loket tidak ditemukan');
+                return;
             }
 
             // Get the next queue number
@@ -56,17 +57,23 @@ class Loket extends Component
                         'nama_layanan' => $loket->id_pelayanan,
                     ]);
 
-                    // update waktu selesai pelayanan and total waktu where id_antrian = $queue->id_antrian
-                    $waktuPelayanan = WaktuPelayanan::where('id_antrian', $queue->id_antrian)
-                        ->first(); 
+                    // Update waktu selesai pelayanan and total waktu where id_antrian = $queue->id_antrian
+                    $waktuPelayanan = WaktuPelayanan::where('id_antrian', $queue->id_antrian)->first(); 
+                    
                     if ($waktuPelayanan) {
-                        $waktuPelayanan->waktu_selesai = Carbon::now();
-                        $waktuMulai = Carbon::parse($waktuPelayanan->waktu_mulai); // Convert waktu_mulai to Carbon instance
-                        $waktuPelayanan->total_waktu = $waktuMulai->diffInSeconds(Carbon::now());
-                        $waktuPelayanan->save();
+                        if ($waktuPelayanan->waktu_mulai) {
+                            $waktuPelayanan->waktu_selesai = \Carbon\Carbon::now();
+                            $waktuMulai = \Carbon\Carbon::parse($waktuPelayanan->waktu_mulai); // Convert waktu_mulai to Carbon instance
+                            $waktuPelayanan->total_waktu = $waktuMulai->diffInSeconds(\Carbon\Carbon::now());
+                            $waktuPelayanan->save();
+                        } else {
+                            \Log::error('Waktu mulai is null for id_antrian: ' . $queue->id_antrian);
+                        }
+                    } else {
+                        \Log::error('WaktuPelayanan not found for id_antrian: ' . $queue->id_antrian);
                     }
 
-                    // add id_loket
+                    // Add id_loket
                     $dataSerial = $queue->nomor_antrian . $id_loket;
 
                     try {
@@ -83,10 +90,10 @@ class Loket extends Component
                 session()->flash('error', 'Tidak ada antrian yang tersedia');
             }
         } catch (\Exception $e) {
+            \Log::error('Error in nextQueue: ' . $e->getMessage());
             session()->flash('error', 'Terjadi kesalahan, silakan coba lagi');
         }
     }
-
 
     public function finishQueue($id_loket)
     {
@@ -107,12 +114,25 @@ class Loket extends Component
 
     public function repeatQueue($id_loket)
     {
+        // take pelayananaktif with nomorAntrian
         $pelayananAktif = PelayananAktif::where('id_loket', $id_loket)
+            ->with('nomorAntrian')
             ->first();
 
         if (!$pelayananAktif) {
             session()->flash('error', 'Tidak ada antrian yang sedang dilayani');
             return;
+        }
+
+        $nomorAntrian = $pelayananAktif->nomorAntrian->nomor_antrian;
+        $dataSerial = $nomorAntrian . $id_loket;
+
+        try {
+            event(new PanggilEvent($dataSerial));
+        } catch (\Exception $e) {
+            \Log::error('Error triggering PanggilEvent: ' . $e->getMessage());
+            session()->flash('error', 'Terjadi kesalahan saat memicu event: ' . $e->getMessage());
+            return; // or handle the error as appropriate
         }
 
         session()->flash('message', 'Antrian dipanggil ulang');

@@ -23,28 +23,28 @@
                 <span class="block sm:inline">{{ session('error') }}</span>
             </div>
         @endif
-    <div class="overflow-x-auto shadow-md sm:rounded-lg max-w-full mx-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">   
+    <div class="overflow-x-auto shadow-md sm:rounded-lg max-w-full mx-auto ">   
         <table class="min-w-full divide-y divide-gray-200 sm:table-fixed">
             <thead class="bg-gray-50">
                 <tr>
-                    <th class="px-6 py-4  text-left text-xs font-medium  uppercase tracking-wider hidden sm:table-cell">Tiering</th>
-                    <th class="px-6 py-4  text-left text-xs font-medium  uppercase tracking-wider hidden sm:table-cell">1 Bulan</th>
-                    <th class="px-6 py-4  text-left text-xs font-medium  uppercase tracking-wider hidden sm:table-cell">3 Bulan</th>
-                    <th class="px-6 py-4  text-left text-xs font-medium  uppercase tracking-wider hidden sm:table-cell">6 Bulan</th>
-                    <th class="px-6 py-4  text-left text-xs font-medium  uppercase tracking-wider hidden sm:table-cell">12 Bulan</th>
-                    <th class="px-6 py-4  text-left text-xs font-medium  uppercase tracking-wider hidden sm:table-cell">24 Bulan</th>
-                    <th class="px-6 py-4  text-left text-xs font-medium  uppercase tracking-wider hidden sm:table-cell">Aksi</th>
+                    <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">Tiering</th>
+                    <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">1 Bulan</th>
+                    <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">3 Bulan</th>
+                    <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">6 Bulan</th>
+                    <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">12 Bulan</th>
+                    <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">24 Bulan</th>
+                    <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 @forelse ($counterRates as $tiering => $rates)
                     <tr class="hover:bg-gray-50 transition-colors duration-200 ease-in-out">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm  hidden sm:table-cell">{{ $tiering }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $tiering }}</td>
                         @foreach ([1, 3, 6, 12, 24] as $duration)
                             @php
                                 $rate = $rates->firstWhere('duration', $duration);
                             @endphp
-                            <td class="px-6 py-4 whitespace-nowrap text-sm  hidden sm:table-cell">{{ $rate ? $rate->rate . '%' : '-' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $rate ? $rate->rate . '%' : '-' }}</td>
                         @endforeach
                         <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                             <button wire:click="openEditPopup('{{ $tiering }}')" class="text-indigo-600 hover:text-indigo-900">Edit</button>

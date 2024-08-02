@@ -75,7 +75,7 @@
         @if ($activeTab === 'statistik')
             <livewire:statistik />
         @elseif ($activeTab === 'informasi')
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <livewire:informasi-website />
                 </div>
@@ -84,10 +84,13 @@
                 </div>  
                 <div>
                     <livewire:valas-scraper />
+                </div>
+                <div>
+                    <livewire:reset-antrian />
                 </div>  
             </div>
         @elseif ($activeTab === 'video')
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <h3 class="text-lg font-semibold mb-2">Tambah Video</h3>
                     <!-- form upload video -->
@@ -112,6 +115,7 @@
                                 class="block w-full px-4 py-3 rounded-md bg-gray-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 transition duration-200 ease-in-out shadow-sm hover:shadow-md" />
                                 <div wire:loading wire:target="video">Uploading...</div>
                                 @error('video') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                <span class="text-gray-500 text-xs">Ukuran video maksimal 15MB dengan format .MP4</span>
                         </div>
                         
                         <div class="text-right">
@@ -167,7 +171,7 @@
                 </div>
             </div>
         @elseif ($activeTab === 'valas')
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <h3 class="text-lg font-semibold mb-2">Tambah Valas</h3>
                     <livewire:valas-form />
@@ -195,7 +199,7 @@
                 </div>
             </div>
         @else
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <h3 class="text-lg font-semibold mb-2">Tambah Iklan</h3>
                     <!-- form upload video -->

@@ -4,9 +4,6 @@
     </h1>
 
     @if ($role == 'admin')
-        <p class="mt-6 text-gray-500 leading-relaxed">
-            Selamat datang di aplikasi ini. Kamu login sebagai admin.
-        </p>
         @livewire('dashboard')
     @elseif ($role == 'user')
         @livewire('loket')

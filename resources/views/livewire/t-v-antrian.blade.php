@@ -1,5 +1,5 @@
 <div class="bg-blue-900 text-white">
-<div class="container mx-auto">
+<div class="container mx-auto px-4">
         <!-- Navbar with logo -->
         <nav class="flex items-center justify-between py-2">
             <a href="#" class="flex items-center">
@@ -74,10 +74,10 @@
                     <div class="space-y-2">
                         <div wire:poll.1500ms="refreshLayanan1">
                             <div class="flex rounded-lg overflow-hidden w-full">
-                                <div class="bg-blue-700 text-white py-3 flex-1 flex items-center px-4 text-left">
+                                <div class="bg-blue-700 text-white py-2 flex-1 flex items-center px-4 text-left">
                                     <span class="font-bold text-2xl">Teller</span>
                                 </div>
-                                <div class="bg-blue-800 py-3 flex-1 flex items-center justify-center">
+                                <div class="bg-blue-800 py-2 flex-1 flex items-center justify-center">
                                     <span class="font-bold text-5xl">
                                         {{ $layananAntrian1->nomor_antrian }}
                                     </span>
@@ -87,10 +87,10 @@
                         
                         <div wire:poll.1500ms="refreshLayanan2">
                             <div class="flex rounded-lg overflow-hidden w-full">
-                                <div class="bg-blue-700 text-white py-3 flex-1 flex items-center px-4 text-left">
+                                <div class="bg-blue-700 text-white py-2 flex-1 flex items-center px-4 text-left">
                                     <span class="font-bold text-2xl">Customer Service</span>
                                 </div>
-                                <div class="bg-blue-800 py-3 flex-1 flex items-center justify-center">
+                                <div class="bg-blue-800 py-2 flex-1 flex items-center justify-center">
                                     <span class="font-bold text-5xl">
                                         {{ $layananAntrian2->nomor_antrian }}
                                     </span>
@@ -105,10 +105,10 @@
                     <div class="grid grid-cols-5 gap-4 text-center">
                         @foreach($loketPelayanan as $loket)
                             <div class="rounded-lg shadow-md overflow-hidden text-center" id="loket-{{ $loket->nama_loket }}">
-                                <div class="bg-blue-700 text-white py-2 px-4 font-bold">
+                                <div class="bg-blue-700 text-white py-1 px-4 font-bold">
                                     {{ $loket->nama_loket }}
                                 </div>
-                                <div class="py-2 px-2 text-blue-800 bg-white text-4xl text-center font-bold">
+                                <div class="py-1 px-2 text-blue-800 bg-white text-4xl text-center font-bold">
                                     {{ $queueData[$loket->nama_loket] ?? '-' }}
                                 </div>
                             </div>
@@ -126,17 +126,17 @@
                                 <table class="w-full text-center bg-blue-800 rounded-lg shadow-md overflow-hidden">
                                     <thead>
                                         <tr>
-                                            <th class="py-1 px-4 bg-blue-700">Mata Uang</th>
-                                            <th class="py-1 px-4 bg-blue-700">Jual</th>
-                                            <th class="py-1 px-4 bg-blue-700">Beli</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Mata Uang</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Jual</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Beli</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($currencyTable1 as $item)
                                         <tr>
-                                            <td class="py-1 px-4"><span class="fi fi-{{ strtolower($item['kode_iso_valas']) }}"></span>  {{ $item['kode_valas'] }}</td>
-                                            <td class="py-1 px-4">{{ number_format($item['jual'], 0, ',', '.') }}</td>
-                                            <td class="py-1 px-4">{{ number_format($item['beli'], 0, ',', '.') }}</td>
+                                            <td class="py-0.5 px-4"><span class="fi fi-{{ strtolower($item['kode_iso_valas']) }}"></span>  {{ $item['kode_valas'] }}</td>
+                                            <td class="py-0.5 px-4">{{ number_format($item['jual'], 0, ',', '.') }}</td>
+                                            <td class="py-0.5 px-4">{{ number_format($item['beli'], 0, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -144,17 +144,17 @@
                                 <table class="w-full text-center bg-blue-800 rounded-lg shadow-md overflow-hidden">
                                     <thead>
                                         <tr>
-                                            <th class="py-1 px-4 bg-blue-700">Mata Uang</th>
-                                            <th class="py-1 px-4 bg-blue-700">Jual</th>
-                                            <th class="py-1 px-4 bg-blue-700">Beli</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Mata Uang</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Jual</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Beli</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($currencyTable2 as $item)
                                         <tr>
-                                            <td class="py-1 px-4"><span class="fi fi-{{ strtolower($item['kode_iso_valas']) }}"></span>  {{ $item['kode_valas'] }}</td>
-                                            <td class="py-1 px-4">{{ number_format($item['jual'], 0, ',', '.') }}</td>
-                                            <td class="py-1 px-4">{{ number_format($item['beli'], 0, ',', '.') }}</td>
+                                            <td class="py-0.5 px-4"><span class="fi fi-{{ strtolower($item['kode_iso_valas']) }}"></span>  {{ $item['kode_valas'] }}</td>
+                                            <td class="py-0.5 px-4">{{ number_format($item['jual'], 0, ',', '.') }}</td>
+                                            <td class="py-0.5 px-4">{{ number_format($item['beli'], 0, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -168,17 +168,17 @@
                                 <table class="w-full text-center bg-blue-800 rounded-lg shadow-md overflow-hidden">
                                     <thead>
                                         <tr>
-                                            <th class="py-1 px-4 bg-blue-700">Mata Uang</th>
-                                            <th class="py-1 px-4 bg-blue-700">Jual</th>
-                                            <th class="py-1 px-4 bg-blue-700">Beli</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Mata Uang</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Jual</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Beli</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($valasTable1 as $item)
                                         <tr>
-                                            <td class="py-1 px-4"><span class="fi fi-{{ strtolower($item['kode_iso_valas']) }}"></span>  {{ $item['kode_valas'] }}</td>
-                                            <td class="py-1 px-4">{{ number_format($item['jual'], 0, ',', '.') }}</td>
-                                            <td class="py-1 px-4">{{ number_format($item['beli'], 0, ',', '.') }}</td>
+                                            <td class="py-0.5 px-4"><span class="fi fi-{{ strtolower($item['kode_iso_valas']) }}"></span>  {{ $item['kode_valas'] }}</td>
+                                            <td class="py-0.5 px-4">{{ number_format($item['jual'], 0, ',', '.') }}</td>
+                                            <td class="py-0.5 px-4">{{ number_format($item['beli'], 0, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -186,17 +186,17 @@
                                 <table class="w-full text-center bg-blue-800 rounded-lg shadow-md overflow-hidden">
                                     <thead>
                                         <tr>
-                                            <th class="py-1 px-4 bg-blue-700">Mata Uang</th>
-                                            <th class="py-1 px-4 bg-blue-700">Jual</th>
-                                            <th class="py-1 px-4 bg-blue-700">Beli</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Mata Uang</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Jual</th>
+                                            <th class="py-0.5 px-4 bg-blue-700">Beli</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($valasTable2 as $item)
                                         <tr>
-                                            <td class="py-1 px-4"><span class="fi fi-{{ strtolower($item['kode_iso_valas']) }}"></span>  {{ $item['kode_valas'] }}</td>
-                                            <td class="py-1 px-4">{{ number_format($item['jual'], 0, ',', '.') }}</td>
-                                            <td class="py-1 px-4">{{ number_format($item['beli'], 0, ',', '.') }}</td>
+                                            <td class="py-0.5 px-4"><span class="fi fi-{{ strtolower($item['kode_iso_valas']) }}"></span>  {{ $item['kode_valas'] }}</td>
+                                            <td class="py-0.5 px-4">{{ number_format($item['jual'], 0, ',', '.') }}</td>
+                                            <td class="py-0.5 px-4">{{ number_format($item['beli'], 0, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -213,12 +213,12 @@
                             <table class="w-full text-center bg-blue-800 rounded-lg shadow-md overflow-hidden">
                                 <thead>
                                     <tr>
-                                        <th class="py-1 px-4 bg-blue-700">Tiering</th>
-                                        <th class="py-1 px-4 bg-blue-700">1 Bulan</th>
-                                        <th class="py-1 px-4 bg-blue-700">3 Bulan</th>
-                                        <th class="py-1 px-4 bg-blue-700">6 Bulan</th>
-                                        <th class="py-1 px-4 bg-blue-700">12 Bulan</th>
-                                        <th class="py-1 px-4 bg-blue-700">24 Bulan</th>
+                                        <th class="py-0.5 px-4 bg-blue-700">Tiering</th>
+                                        <th class="py-1 px-4 bg-blue-700">1 Bln</th>
+                                        <th class="py-1 px-4 bg-blue-700">3 Bln</th>
+                                        <th class="py-1 px-4 bg-blue-700">6 Bln</th>
+                                        <th class="py-1 px-4 bg-blue-700">12 Bln</th>
+                                        <th class="py-1 px-4 bg-blue-700">24 Bln</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -262,7 +262,7 @@
                     @endif
                     <div>
                     @if($this->isFeatureActive('iklan'))
-                        <div class="relative overflow-hidden h-40 rounded-md mt-2" wire:ignore style="width: 310px;">
+                        <div class="relative overflow-hidden h-40 rounded-md mt-2" wire:ignore>
                             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full">
                                 @foreach($images as $index => $image)
                                     <div class="carousel-item w-72 h-40 flex-shrink-0">
@@ -270,10 +270,6 @@
                                     </div>
                                 @endforeach
                             </div>
-                        </div>
-                        <!-- last update text -->
-                        <div class="text-right mt-1">
-                            <p class="text-xs">Terakhir diperbarui: {{ $lastUpdate }} WIB</p>
                         </div>
                     @endif
                     <script>

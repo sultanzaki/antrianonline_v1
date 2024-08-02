@@ -15,5 +15,6 @@ class WaktuPelayanan extends Model
         'id_antrian',
         'waktu_mulai',
         'waktu_selesai',
+        'total_waktu',
     ];
 }

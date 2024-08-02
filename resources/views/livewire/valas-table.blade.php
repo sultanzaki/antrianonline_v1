@@ -1,47 +1,49 @@
 <div>
     <div class="overflow-hidden shadow-md sm:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead>
-                <tr class="bg-gray-50">
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Mata Uang</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Beli</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Jual</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Aksi</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @forelse($valas as $item)
-                    <tr class="hover:bg-gray-50 transition-colors duration-200">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <span class="fi fi-{{ strtolower($item->kode_iso_valas) }} mr-2"></span>
-                                <span class="text-sm font-medium">{{ $item->kode_valas }}</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm ">
-                            Rp{{ number_format($item->beli, 0, ',', '.') }}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm ">
-                            Rp{{ number_format($item->jual, 0, ',', '.') }}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button wire:click="openEditModal({{ $item->id }})" class="text-indigo-600 hover:text-indigo-900 mr-3 transition-colors duration-200">
-                                Edit
-                            </button>
-                            <button wire:click="openDeleteModal({{ $item->id }})" class="text-red-600 hover:text-red-900 transition-colors duration-200">
-                                Hapus
-                            </button>
-                        </td>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                    <tr class="bg-gray-50">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Mata Uang</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Beli</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Jual</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm  text-center">
-                            Data tidak ditemukan
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @forelse($valas as $item)
+                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <span class="fi fi-{{ strtolower($item->kode_iso_valas) }} mr-2"></span>
+                                    <span class="text-sm font-medium">{{ $item->kode_valas }}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                Rp{{ number_format($item->beli, 0, ',', '.') }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                Rp{{ number_format($item->jual, 0, ',', '.') }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button wire:click="openEditModal({{ $item->id }})" class="text-indigo-600 hover:text-indigo-900 mr-3 transition-colors duration-200">
+                                    Edit
+                                </button>
+                                <button wire:click="openDeleteModal({{ $item->id }})" class="text-red-600 hover:text-red-900 transition-colors duration-200">
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                                Data tidak ditemukan
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Kontrol Paginasi -->
@@ -49,6 +51,7 @@
         {{ $valas->links() }}
     </div>
 
+    <div class="absolute bottom-0 right-0 w-8 h-8 bg-gradient-to-l from-white pointer-events-none"></div>
     <!-- Edit Modal -->
     <div x-show="$wire.isEditModalOpen" class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
